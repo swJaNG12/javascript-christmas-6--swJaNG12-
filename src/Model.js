@@ -1,4 +1,4 @@
-import { PATTERN, DECIMAL_NUMBER } from './Constants.js';
+import { PATTERN, DECIMAL_NUMBER, EVENT } from './Constants.js';
 import { ErrorMessage } from './ErrorMessage.js';
 
 export class Model {
@@ -19,7 +19,7 @@ export class Model {
 
 	#validateVisitDateRange(dateOfVisit) {
 		const visitDate = this.#parseStringToNumber(dateOfVisit);
-		if (visitDate < 1 || visitDate > 31) {
+		if (visitDate < EVENT.DATE_RANGE.MIN || visitDate > EVENT.DATE_RANGE.MAX) {
 			throw new Error(ErrorMessage.invalidDateOfVisit());
 		}
 	}
