@@ -1,3 +1,4 @@
+import { Console } from "@woowacourse/mission-utils";
 import { DECIMAL_NUMBER } from "./Constants.js";
 import InputView from "./InputView.js";
 import { Model } from "./Model/Model.js";
@@ -13,7 +14,12 @@ class App {
 
 		const dateOfVisit = await this.validateDateOfVisit();
 
-		const orderMenu = await this.validateMenuOrder();
+		const orderedMenu = await this.validateMenuOrder();
+
+		OutputView.printEventDate(dateOfVisit);
+
+		const totalAmount = this.calculateTotalAmount(orderedMenu);
+		Console.print(totalAmount);
 	}
 
 	async validateDateOfVisit() {
@@ -40,6 +46,10 @@ class App {
 				console.error(error);
 			}
 		}
+	}
+
+	calculateTotalAmount(orderedMenu) {
+		return this.model.calculateTotalAmount(orderedMenu);
 	}
 }
 
