@@ -20,6 +20,11 @@ class App {
 
 		const totalAmount = this.calculateTotalAmount(orderedMenuArray);
 		Console.print(totalAmount);
+
+		const orderedMenuMessageArray =
+			this.createOrderedMenuMessage(orderedMenuArray);
+
+		OutputView.printMenu(orderedMenuMessageArray);
 	}
 
 	async validateDateOfVisit() {
@@ -50,8 +55,12 @@ class App {
 		}
 	}
 
-	calculateTotalAmount(orderedMenu) {
-		return this.model.calculateTotalAmount(orderedMenu);
+	calculateTotalAmount(orderedMenuArray) {
+		return this.model.calculateTotalAmount(orderedMenuArray);
+	}
+
+	createOrderedMenuMessage(orderedMenuArray) {
+		return this.model.createOrderedMenuMessage(orderedMenuArray);
 	}
 }
 

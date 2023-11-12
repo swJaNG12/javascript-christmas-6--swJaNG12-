@@ -9,9 +9,11 @@ const OutputView = {
 			`12월 ${dateOfVisit}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!`
 		);
 	},
-	printMenu() {
+	printMenu(orderedMenuMessageArray) {
 		Console.print("<주문 메뉴>");
-		// ...
+		orderedMenuMessageArray.forEach((menu) => {
+			Console.print(menu);
+		});
 	},
 	// ...
 };

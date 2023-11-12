@@ -54,4 +54,10 @@ export const MENU = {
 export const SEPARATOR = {
 	COMMA: ",",
 	DASH: "-",
+	SPACE_STRING: " ",
+};
+
+export const UNIT = {
+	QUANTITY_UNIT: "개",
+	CURRENCY_UNIT: "원",
 };

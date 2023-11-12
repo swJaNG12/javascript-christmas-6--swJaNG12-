@@ -1,6 +1,6 @@
 import { VisitDateValidator } from "./VisitDateValidator.js";
 import { MenuOrderValidator } from "./MenuOrderValidator.js";
-import { DECIMAL_NUMBER, MENU, SEPARATOR } from "../Constants.js";
+import { DECIMAL_NUMBER, MENU, SEPARATOR, UNIT } from "../Constants.js";
 
 export class Model {
 	constructor() {
@@ -27,5 +27,11 @@ export class Model {
 			}
 		});
 		return totalAmount;
+	}
+
+	createOrderedMenuMessage(orderedMenuArray) {
+		return orderedMenuArray
+			.map((menu) => menu.join(SEPARATOR.SPACE_STRING))
+			.map((menu) => menu + UNIT.QUANTITY_UNIT);
 	}
 }
