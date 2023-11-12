@@ -1,6 +1,6 @@
 import { DECIMAL_NUMBER } from "./Constants.js";
 import InputView from "./InputView.js";
-import { Model } from "./Model.js";
+import { Model } from "./Model/Model.js";
 import OutputView from "./OutputView.js";
 
 class App {
