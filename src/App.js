@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { DECIMAL_NUMBER } from "./Constants.js";
+import { DECIMAL_NUMBER, SEPARATOR } from "./Constants.js";
 import InputView from "./InputView.js";
 import { Model } from "./Model/Model.js";
 import OutputView from "./OutputView.js";
@@ -14,11 +14,11 @@ class App {
 
 		const dateOfVisit = await this.validateDateOfVisit();
 
-		const orderedMenu = await this.validateMenuOrder();
+		const orderedMenuArray = await this.validateMenuOrder();
 
 		OutputView.printEventDate(dateOfVisit);
 
-		const totalAmount = this.calculateTotalAmount(orderedMenu);
+		const totalAmount = this.calculateTotalAmount(orderedMenuArray);
 		Console.print(totalAmount);
 	}
 
@@ -41,7 +41,9 @@ class App {
 				const orderMenu = await InputView.readMenu();
 				this.model.validateMenuOrder(orderMenu);
 
-				return orderMenu;
+				return orderMenu.split(SEPARATOR.COMMA).map((menu) => {
+					return menu.split(SEPARATOR.DASH);
+				});
 			} catch (error) {
 				console.error(error);
 			}

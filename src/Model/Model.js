@@ -16,11 +16,7 @@ export class Model {
 		this.menuOrderValidator.validateMenuOrder(orderMenu);
 	}
 
-	calculateTotalAmount(orderedMenu) {
-		const orderedMenuArray = orderedMenu.split(SEPARATOR.COMMA).map((menu) => {
-			return menu.split(SEPARATOR.DASH);
-		});
-
+	calculateTotalAmount(orderedMenuArray) {
 		let totalAmount = 0;
 		orderedMenuArray.forEach(([item, quantity]) => {
 			for (let category in MENU) {
