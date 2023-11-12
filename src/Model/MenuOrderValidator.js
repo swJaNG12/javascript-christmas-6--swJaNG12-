@@ -1,47 +1,7 @@
-import {
-	PATTERN,
-	DECIMAL_NUMBER,
-	EVENT,
-	MENU,
-	SEPARATOR,
-} from "./Constants.js";
-import { ErrorMessage } from "./ErrorMessage.js";
+import { DECIMAL_NUMBER, SEPARATOR, MENU } from "../Constants.js";
+import { ErrorMessage } from "../ErrorMessage.js";
 
-export class Model {
-	validateDateOfVisit(dateOfVisit) {
-		this.#validateVisitDateIsNumber(dateOfVisit);
-		this.#validateVisitDateRange(dateOfVisit);
-	}
-
-	#throwInvalidDateOfVisitError() {
-		throw new Error(ErrorMessage.invalidDateOfVisit());
-	}
-
-	#parseStringToNumber(string) {
-		return parseInt(string, DECIMAL_NUMBER);
-	}
-
-	#validateVisitDateIsNumber(dateOfVisit) {
-		if (!PATTERN.ONLY_NUMBER.test(dateOfVisit)) {
-			this.#throwInvalidDateOfVisitError();
-		}
-	}
-
-	#validateVisitDateRange(dateOfVisit) {
-		const visitDate = this.#parseStringToNumber(dateOfVisit);
-		if (visitDate < EVENT.DATE_RANGE.MIN || visitDate > EVENT.DATE_RANGE.MAX) {
-			this.#throwInvalidDateOfVisitError();
-		}
-	}
-
-	validateMenuOrder(orderMenu) {
-		const orderedMenuArray = orderMenu.split(SEPARATOR.COMMA);
-		this.#validateMenuNameInOrder(orderedMenuArray);
-		this.#validateOnlyBeveragesInOrder(orderedMenuArray);
-		this.#validateUniqueMenuNamesInOrder(orderedMenuArray);
-		this.#validateMenuCountRangeInOrder(orderedMenuArray);
-	}
-
+export class MenuOrderValidator {
 	#createMenuNames() {
 		const menuNamesArray = [];
 		Object.keys(MENU).forEach((menu) => {
@@ -108,5 +68,13 @@ export class Model {
 		} else {
 			throw new Error(ErrorMessage.invalidOrder());
 		}
+	}
+
+	validateMenuOrder(orderMenu) {
+		const orderedMenuArray = orderMenu.split(SEPARATOR.COMMA);
+		this.#validateMenuNameInOrder(orderedMenuArray);
+		this.#validateOnlyBeveragesInOrder(orderedMenuArray);
+		this.#validateUniqueMenuNamesInOrder(orderedMenuArray);
+		this.#validateMenuCountRangeInOrder(orderedMenuArray);
 	}
 }
