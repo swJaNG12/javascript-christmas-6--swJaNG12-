@@ -19,12 +19,12 @@ class App {
 		OutputView.printEventDate(dateOfVisit);
 
 		const totalAmount = this.calculateTotalAmount(orderedMenuArray);
-		Console.print(totalAmount);
 
 		const orderedMenuMessageArray =
 			this.createOrderedMenuMessage(orderedMenuArray);
 
 		OutputView.printMenu(orderedMenuMessageArray);
+		OutputView.printTotalAmountNoDiscount(totalAmount);
 	}
 
 	async validateDateOfVisit() {

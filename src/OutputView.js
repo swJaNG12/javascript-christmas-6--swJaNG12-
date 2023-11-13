@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { UNIT } from "./Constants.js";
 
 const OutputView = {
 	start() {
@@ -12,10 +13,13 @@ const OutputView = {
 	printMenu(orderedMenuMessageArray) {
 		Console.print("<주문 메뉴>");
 		orderedMenuMessageArray.forEach((menu) => {
-			Console.print(menu);
+			Console.print(menu + UNIT.QUANTITY_UNIT);
 		});
 	},
-	// ...
+	printTotalAmountNoDiscount(totalAmount) {
+		Console.print("<할인 전 총주문 금액>");
+		Console.print(totalAmount + UNIT.CURRENCY_UNIT);
+	},
 };
 
 export default OutputView;
