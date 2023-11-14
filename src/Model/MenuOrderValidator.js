@@ -1,18 +1,28 @@
-import { DECIMAL_NUMBER, SEPARATOR, MENU } from "../Constants.js";
+import {
+	DECIMAL_NUMBER,
+	SEPARATOR,
+	MENU,
+	EVENT,
+	INITIAL_VALUE_ZERO,
+} from "../Constants.js";
+
 import { ErrorMessage } from "../ErrorMessage.js";
 
 export class MenuOrderValidator {
 	#createMenuNames() {
 		const menuNamesArray = [];
+
 		Object.keys(MENU).forEach((menu) => {
 			menuNamesArray.push(...MENU[menu].ITEMS);
 		});
+
 		return menuNamesArray;
 	}
 
 	#createOrderedMenuNames(orderedMenuArray) {
 		return orderedMenuArray.map((menu) => menu.split(SEPARATOR.DASH)[0]);
 	}
+
 	#createOrderedMenuCount(orderedMenuArray) {
 		return orderedMenuArray.map((menu) => {
 			return parseInt(menu.split(SEPARATOR.DASH)[1], DECIMAL_NUMBER);
@@ -21,6 +31,7 @@ export class MenuOrderValidator {
 
 	#validateMenuNameInOrder(orderedMenuArray) {
 		const menuNamesArray = this.#createMenuNames();
+
 		const orderedMenuNamesArray =
 			this.#createOrderedMenuNames(orderedMenuArray);
 
@@ -57,12 +68,18 @@ export class MenuOrderValidator {
 		const orderedMenuCountArray =
 			this.#createOrderedMenuCount(orderedMenuArray);
 
-		if (orderedMenuCountArray.every((count) => count >= 1 && count <= 20)) {
+		if (
+			orderedMenuCountArray.every(
+				(count) =>
+					count >= EVENT.MIN_MENU_ORDER && count <= EVENT.MAX_MENU_ORDER
+			)
+		) {
 			const totalOrderCount = orderedMenuCountArray.reduce(
 				(acc, cur) => acc + cur,
-				0
+				INITIAL_VALUE_ZERO
 			);
-			if (totalOrderCount > 20) {
+
+			if (totalOrderCount > EVENT.MAX_MENU_ORDER) {
 				throw new Error(ErrorMessage.invalidOrder());
 			}
 		} else {
@@ -72,9 +89,13 @@ export class MenuOrderValidator {
 
 	validateMenuOrder(orderMenu) {
 		const orderedMenuArray = orderMenu.split(SEPARATOR.COMMA);
+
 		this.#validateMenuNameInOrder(orderedMenuArray);
+
 		this.#validateOnlyBeveragesInOrder(orderedMenuArray);
+
 		this.#validateUniqueMenuNamesInOrder(orderedMenuArray);
+
 		this.#validateMenuCountRangeInOrder(orderedMenuArray);
 	}
 }
