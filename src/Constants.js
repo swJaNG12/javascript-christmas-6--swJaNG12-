@@ -3,16 +3,15 @@ export const PATTERN = {
 };
 
 export const DECIMAL_NUMBER = 10;
+export const MINIMUM_DISCOUNT_AMOUNT = 10000;
+export const INITIAL_VALUE_ZERO = 0;
 
 export const EVENT = {
 	DATE_RANGE: { MIN: 1, MAX: 31 },
+	MIN_MENU_ORDER: 1,
 	MAX_MENU_ORDER: 20,
 	GIFT_CONDITION: 120000,
 	DISCOUNT_CONDITION: 10000,
-	D_DAY_DISCOUNT: { START: 1000, INCREASE: 100 },
-	WEEKDAY_DISCOUNT: 2023,
-	WEEKEND_DISCOUNT: 2023,
-	SPECIAL_DISCOUNT: 1000,
 	BADGE_CONDITION: { STAR: 5000, TREE: 10000, SANTA: 20000 },
 };
 
@@ -51,13 +50,55 @@ export const MENU = {
 	},
 };
 
+export const DISCOUNT_CONDITIONS = {
+	WEEKDAY_DISCOUNT: {
+		DAYS: [
+			3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28,
+			31,
+		],
+		DISCOUNT: 2023,
+		MENU: "DESSERT",
+	},
+	WEEKEND_DISCOUNT: {
+		DAYS: [1, 2, 8, 9, 15, 16, 22, 23, 29, 30],
+		DISCOUNT: 2023,
+		MENU: "MAIN",
+	},
+	SPECIAL_DISCOUNT: {
+		DAYS: [3, 10, 17, 24, 25, 31],
+		DISCOUNT: 1000,
+	},
+};
+
+export const D_DAY_DISCOUNT = {
+	START_DAY: 1,
+	END_DAY: 25,
+	INITIAL_DISCOUNT: 1000,
+	INCREMENT: 100,
+};
+
 export const SEPARATOR = {
 	COMMA: ",",
 	DASH: "-",
 	SPACE_STRING: " ",
+	COLON: ":",
 };
 
 export const UNIT = {
 	QUANTITY_UNIT: "개",
 	CURRENCY_UNIT: "원",
 };
+
+export const GIFT_MENU = {
+	ITEM: "샴페인",
+	COUNT: 1,
+	PRICE: 25000,
+};
+
+export const BENEFIT_TITLE = [
+	"크리스마스 디데이 할인",
+	"평일 할인",
+	"주말 할인",
+	"특별 할인",
+	"증정 이벤트",
+];

@@ -1,5 +1,8 @@
-import { Console } from "@woowacourse/mission-utils";
-import { DECIMAL_NUMBER, SEPARATOR } from "./Constants.js";
+import {
+	DECIMAL_NUMBER,
+	MINIMUM_DISCOUNT_AMOUNT,
+	SEPARATOR,
+} from "./Constants.js";
 import InputView from "./InputView.js";
 import { Model } from "./Model/Model.js";
 import OutputView from "./OutputView.js";
@@ -16,15 +19,22 @@ class App {
 
 		const orderedMenuArray = await this.validateMenuOrder();
 
-		OutputView.printEventDate(dateOfVisit);
-
 		const totalAmount = this.calculateTotalAmount(orderedMenuArray);
 
 		const orderedMenuMessageArray =
 			this.createOrderedMenuMessage(orderedMenuArray);
 
-		OutputView.printMenu(orderedMenuMessageArray);
+		OutputView.printEventDate(dateOfVisit);
+		OutputView.printOrderedMenu(orderedMenuMessageArray);
 		OutputView.printTotalAmountNoDiscount(totalAmount);
+
+		const orderResult = this.createOrderResult(
+			totalAmount,
+			dateOfVisit,
+			orderedMenuArray
+		);
+
+		OutputView.printOrderResult(...orderResult);
 	}
 
 	async validateDateOfVisit() {
@@ -61,6 +71,18 @@ class App {
 
 	createOrderedMenuMessage(orderedMenuArray) {
 		return this.model.createOrderedMenuMessage(orderedMenuArray);
+	}
+
+	createOrderResult(totalAmount, dateOfVisit, orderedMenuArray) {
+		if (totalAmount < MINIMUM_DISCOUNT_AMOUNT) {
+			return this.model.noDiscountOrderResult(totalAmount);
+		} else {
+			return this.model.discountOrderResult(
+				totalAmount,
+				dateOfVisit,
+				orderedMenuArray
+			);
+		}
 	}
 }
 
