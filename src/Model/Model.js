@@ -64,11 +64,11 @@ export class Model {
 
 	#selectBedge(totalBenefitAmount) {
 		if (totalBenefitAmount >= EVENT.BADGE_CONDITION.SANTA) {
-			return "산타";
+			return EVENT.BADGE.SANTA;
 		} else if (totalBenefitAmount >= EVENT.BADGE_CONDITION.TREE) {
-			return "트리";
+			return EVENT.BADGE.TREE;
 		} else if (totalBenefitAmount >= EVENT.BADGE_CONDITION.STAR) {
-			return "스타";
+			return EVENT.BADGE.STAR;
 		} else if (totalBenefitAmount < EVENT.BADGE_CONDITION.STAR) {
 			return "없음";
 		}

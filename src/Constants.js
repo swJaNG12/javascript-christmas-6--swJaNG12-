@@ -13,6 +13,11 @@ export const EVENT = {
 	GIFT_CONDITION: 120000,
 	DISCOUNT_CONDITION: 10000,
 	BADGE_CONDITION: { STAR: 5000, TREE: 10000, SANTA: 20000 },
+	BADGE: {
+		STAR: "스타",
+		TREE: "트리",
+		SANTA: "산타",
+	},
 };
 
 export const MENU = {
