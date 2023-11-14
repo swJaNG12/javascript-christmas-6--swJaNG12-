@@ -6,6 +6,7 @@ import {
 import InputView from "./View/InputView.js";
 import { Model } from "./Model/Model.js";
 import OutputView from "./View/OutputView.js";
+import { Console } from "@woowacourse/mission-utils";
 
 class App {
 	constructor() {
@@ -45,7 +46,7 @@ class App {
 
 				return parseInt(dateOfVisit, DECIMAL_NUMBER);
 			} catch (error) {
-				console.error(error);
+				Console.print(error.message);
 			}
 		}
 	}
@@ -60,7 +61,7 @@ class App {
 					return menu.split(SEPARATOR.DASH);
 				});
 			} catch (error) {
-				console.error(error);
+				Console.print(error.message);
 			}
 		}
 	}
