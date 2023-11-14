@@ -6,7 +6,7 @@ import {
 	GIFT_MENU,
 	INITIAL_VALUE_ZERO,
 	MENU,
-} from "../Constants.js";
+} from "../Utils/Constants.js";
 
 export class DiscountCalculator {
 	#dDayDisCount(dateOfVisit) {

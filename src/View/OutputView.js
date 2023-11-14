@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { UNIT } from "./Constants.js";
+import { UNIT } from "../Utils/Constants.js";
 
 const OutputView = {
 	start() {

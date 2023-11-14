@@ -4,9 +4,9 @@ import {
 	MENU,
 	EVENT,
 	INITIAL_VALUE_ZERO,
-} from "../Constants.js";
+} from "../Utils/Constants.js";
 
-import { ErrorMessage } from "../ErrorMessage.js";
+import { ErrorMessage } from "../Utils/ErrorMessage.js";
 
 export class MenuOrderValidator {
 	#createMenuNames() {

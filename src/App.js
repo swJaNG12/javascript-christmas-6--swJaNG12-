@@ -2,10 +2,10 @@ import {
 	DECIMAL_NUMBER,
 	MINIMUM_DISCOUNT_AMOUNT,
 	SEPARATOR,
-} from "./Constants.js";
-import InputView from "./InputView.js";
+} from "./Utils/Constants.js";
+import InputView from "./View/InputView.js";
 import { Model } from "./Model/Model.js";
-import OutputView from "./OutputView.js";
+import OutputView from "./View/OutputView.js";
 
 class App {
 	constructor() {

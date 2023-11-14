@@ -9,7 +9,7 @@ import {
 	MENU,
 	SEPARATOR,
 	UNIT,
-} from "../Constants.js";
+} from "../Utils/Constants.js";
 import { DiscountCalculator } from "./DiscountCalculator.js";
 
 export class Model {

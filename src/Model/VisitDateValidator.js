@@ -1,5 +1,5 @@
-import { DECIMAL_NUMBER, EVENT, PATTERN } from "../Constants.js";
-import { ErrorMessage } from "../ErrorMessage.js";
+import { DECIMAL_NUMBER, EVENT, PATTERN } from "../Utils/Constants.js";
+import { ErrorMessage } from "../Utils/ErrorMessage.js";
 
 export class VisitDateValidator {
 	#throwInvalidDateOfVisitError() {
