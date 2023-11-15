@@ -1,26 +1,27 @@
 import { Console } from "@woowacourse/mission-utils";
 import { UNIT } from "../Utils/Constants.js";
+import { MESSAGES_OUTPUT } from "../Utils/EventMessages.js";
 
 const OutputView = {
 	start() {
-		Console.print("안녕하세요! 우테코 식당 12월 이벤트 플레너입니다.");
+		Console.print(MESSAGES_OUTPUT.WELCOME_MESSAGE);
 	},
 
 	printEventDate(dateOfVisit) {
 		Console.print(
-			`12월 ${dateOfVisit}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!`
+			MESSAGES_OUTPUT.EVENT_PREVIEW_MESSAGE.replace("{day}", dateOfVisit)
 		);
 	},
 
 	printOrderedMenu(orderedMenuMessageArray) {
-		Console.print("\n<주문 메뉴>");
+		Console.print(MESSAGES_OUTPUT.ORDERED_MENU_TITLE);
 		orderedMenuMessageArray.forEach((menu) => {
 			Console.print(menu + UNIT.QUANTITY_UNIT);
 		});
 	},
 
 	printTotalAmountNoDiscount(totalAmount) {
-		Console.print("\n<할인 전 총주문 금액>");
+		Console.print(MESSAGES_OUTPUT.TOTAL_AMOUNT_NO_DISCOUNT_TITLE);
 		Console.print(totalAmount.toLocaleString("en-US") + UNIT.CURRENCY_UNIT);
 	},
 
@@ -31,19 +32,19 @@ const OutputView = {
 		expectedPayment,
 		badge
 	) {
-		Console.print("\n<증정 메뉴>");
+		Console.print(MESSAGES_OUTPUT.GIFT_MENU_TITLE);
 		Console.print(`${giftMenu}`);
-		Console.print("\n<혜택 내역>");
+		Console.print(MESSAGES_OUTPUT.BENEFIT_DETAIL_TITLE);
 		benefitDetail.forEach((benefit) => {
 			if (benefit) {
 				Console.print(benefit);
 			}
 		});
-		Console.print("\n<총혜택 금액>");
+		Console.print(MESSAGES_OUTPUT.TOTAL_BENEFIT_AMOUNT_TITLE);
 		Console.print(`${totalBenefitAmount}`);
-		Console.print("\n<할인 후 예상 결제 금액>");
+		Console.print(MESSAGES_OUTPUT.EXPECTED_PAYMENT_TITLE);
 		Console.print(`${expectedPayment}`);
-		Console.print("\n<12월 이벤트 배지>");
+		Console.print(MESSAGES_OUTPUT.EVENT_BADGE_TITLE);
 		Console.print(`${badge}`);
 	},
 };

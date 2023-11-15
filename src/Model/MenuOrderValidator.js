@@ -89,13 +89,9 @@ export class MenuOrderValidator {
 
 	validateMenuOrder(orderMenu) {
 		const orderedMenuArray = orderMenu.split(SEPARATOR.COMMA);
-
 		this.#validateMenuNameInOrder(orderedMenuArray);
-
 		this.#validateOnlyBeveragesInOrder(orderedMenuArray);
-
 		this.#validateUniqueMenuNamesInOrder(orderedMenuArray);
-
 		this.#validateMenuCountRangeInOrder(orderedMenuArray);
 	}
 }
