@@ -17,7 +17,7 @@ jest.mock("../src/Model/VisitDateValidator.js", () => {
 	};
 });
 
-describe("Model 클래스 메서드 테스트", () => {
+describe("Model 클래스 validateDateOfVisit 메서드 테스트", () => {
 	let model;
 	let mockDate;
 
@@ -26,16 +26,16 @@ describe("Model 클래스 메서드 테스트", () => {
 		mockDate = "25";
 	});
 
-	describe("VisitDateValidator 모듈 테스트", () => {
-		test("validateDateOfVisit 메서드 호출 테스트", () => {
-			model.validateDateOfVisit(mockDate);
+	test("validateDateOfVisit 메서드 호출 테스트", () => {
+		model.validateDateOfVisit(mockDate);
 
-			expect(model.visitDateValidator.validateDateOfVisit).toHaveBeenCalledWith(
-				mockDate
-			);
-		});
+		expect(model.visitDateValidator.validateDateOfVisit).toHaveBeenCalledWith(
+			mockDate
+		);
+	});
 
-		test("validateDateOfVisit 메서드 동작 테스트 (유효한 경우)", () => {
+	describe("validateDateOfVisit 메서드 동작 테스트", () => {
+		test("validateDateOfVisit (유효한 경우)", () => {
 			model.validateDateOfVisit(mockDate);
 
 			expect(() =>
@@ -43,7 +43,7 @@ describe("Model 클래스 메서드 테스트", () => {
 			).not.toThrow();
 		});
 
-		test("validateDateOfVisit 메서드 동작 테스트 (범위를 벗어난 경우)", () => {
+		test("validateDateOfVisit (범위를 벗어난 경우)", () => {
 			mockDate = "0";
 
 			expect(() =>
@@ -51,7 +51,7 @@ describe("Model 클래스 메서드 테스트", () => {
 			).toThrow(ErrorMessage.invalidDateOfVisit());
 		});
 
-		test("validateDateOfVisit 메서드 동작 테스트 (숫자가 아닌 경우)", () => {
+		test("validateDateOfVisit (숫자가 아닌 경우)", () => {
 			mockDate = "a";
 
 			expect(() =>
