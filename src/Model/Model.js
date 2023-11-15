@@ -1,11 +1,9 @@
 import { VisitDateValidator } from "./VisitDateValidator.js";
 import { MenuOrderValidator } from "./MenuOrderValidator.js";
 import { DiscountCalculator } from "./DiscountCalculator.js";
+import { DiscountOrderHelper } from "./DiscountOrderHelper.js";
 import {
-	BENEFIT_TITLE,
 	DECIMAL_NUMBER,
-	EVENT,
-	GIFT_MENU,
 	INITIAL_VALUE_ZERO,
 	MENU,
 	SEPARATOR,
@@ -18,6 +16,10 @@ export class Model {
 		this.menuOrderValidator = new MenuOrderValidator();
 		this.discountCalculator = new DiscountCalculator();
 		this.orderedMenuArray = [];
+		this.discountOrderHelper = new DiscountOrderHelper(
+			this.orderedMenuArray,
+			this.discountCalculator
+		);
 	}
 
 	setOrderedMenuArray(orderedMenuArray) {
@@ -61,65 +63,10 @@ export class Model {
 		];
 	}
 
-	#determineGiftMenu(totalAmount) {
-		if (totalAmount >= EVENT.GIFT_CONDITION) {
-			return GIFT_MENU.ITEM + GIFT_MENU.COUNT + UNIT.QUANTITY_UNIT;
-		} else {
-			return "없음";
-		}
-	}
-
-	#selectBedge(totalBenefitAmount) {
-		if (totalBenefitAmount >= EVENT.BADGE_CONDITION.SANTA) {
-			return EVENT.BADGE.SANTA;
-		} else if (totalBenefitAmount >= EVENT.BADGE_CONDITION.TREE) {
-			return EVENT.BADGE.TREE;
-		} else if (totalBenefitAmount >= EVENT.BADGE_CONDITION.STAR) {
-			return EVENT.BADGE.STAR;
-		} else if (totalBenefitAmount < EVENT.BADGE_CONDITION.STAR) {
-			return "없음";
-		}
-	}
-
-	#convertBenefitDetail(benefitDetail) {
-		return benefitDetail.map((benefit, idx) => {
-			if (benefit !== 0) {
-				return (
-					BENEFIT_TITLE[idx] +
-					SEPARATOR.COLON +
-					SEPARATOR.SPACE_STRING +
-					SEPARATOR.DASH +
-					benefit.toLocaleString("en-US") +
-					UNIT.CURRENCY_UNIT
-				);
-			}
-		});
-	}
-
 	discountOrderResult(totalAmount, dateOfVisit) {
-		const giftMenu = this.#determineGiftMenu(totalAmount);
-		const benefitDetail = this.discountCalculator.computeBenefitDetails(
+		return this.discountOrderHelper.discountOrderResult(
 			totalAmount,
-			dateOfVisit,
-			this.orderedMenuArray
+			dateOfVisit
 		);
-		const totalBenefitAmount = benefitDetail.reduce((acc, cur) => acc + cur, 0);
-		const expectedPayment =
-			totalAmount -
-			totalBenefitAmount +
-			(giftMenu === "없음" ? 0 : GIFT_MENU.PRICE);
-		const bedge = this.#selectBedge(totalBenefitAmount);
-
-		const filnalBenefit = this.#convertBenefitDetail(benefitDetail);
-
-		return [
-			giftMenu,
-			filnalBenefit,
-			SEPARATOR.DASH +
-				totalBenefitAmount.toLocaleString("en-US") +
-				UNIT.CURRENCY_UNIT,
-			expectedPayment.toLocaleString("en-US") + UNIT.CURRENCY_UNIT,
-			bedge,
-		];
 	}
 }
