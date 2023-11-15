@@ -104,7 +104,10 @@ export class Model {
 			orderedMenuArray
 		);
 		const totalBenefitAmount = benefitDetail.reduce((acc, cur) => acc + cur, 0);
-		const expectedPayment = totalAmount - totalBenefitAmount + GIFT_MENU.PRICE;
+		const expectedPayment =
+			totalAmount -
+			totalBenefitAmount +
+			(giftMenu === "없음" ? 0 : GIFT_MENU.PRICE);
 		const bedge = this.#selectBedge(totalBenefitAmount);
 
 		const filnalBenefit = this.#convertBenefitDetail(benefitDetail);
