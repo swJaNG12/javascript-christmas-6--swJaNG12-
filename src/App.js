@@ -19,11 +19,11 @@ class App {
 		const dateOfVisit = await this.validateDateOfVisit();
 
 		const orderedMenuArray = await this.validateMenuOrder();
+		this.model.setOrderedMenuArray(orderedMenuArray);
 
-		const totalAmount = this.calculateTotalAmount(orderedMenuArray);
+		const totalAmount = this.calculateTotalAmount();
 
-		const orderedMenuMessageArray =
-			this.createOrderedMenuMessage(orderedMenuArray);
+		const orderedMenuMessageArray = this.createOrderedMenuMessage();
 
 		OutputView.printEventDate(dateOfVisit);
 		OutputView.printOrderedMenu(orderedMenuMessageArray);
@@ -66,12 +66,12 @@ class App {
 		}
 	}
 
-	calculateTotalAmount(orderedMenuArray) {
-		return this.model.calculateTotalAmount(orderedMenuArray);
+	calculateTotalAmount() {
+		return this.model.calculateTotalAmount();
 	}
 
-	createOrderedMenuMessage(orderedMenuArray) {
-		return this.model.createOrderedMenuMessage(orderedMenuArray);
+	createOrderedMenuMessage() {
+		return this.model.createOrderedMenuMessage();
 	}
 
 	createOrderResult(totalAmount, dateOfVisit, orderedMenuArray) {

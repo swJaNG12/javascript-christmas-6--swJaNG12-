@@ -1,5 +1,6 @@
 import { VisitDateValidator } from "./VisitDateValidator.js";
 import { MenuOrderValidator } from "./MenuOrderValidator.js";
+import { DiscountCalculator } from "./DiscountCalculator.js";
 import {
 	BENEFIT_TITLE,
 	DECIMAL_NUMBER,
@@ -10,13 +11,17 @@ import {
 	SEPARATOR,
 	UNIT,
 } from "../Utils/Constants.js";
-import { DiscountCalculator } from "./DiscountCalculator.js";
 
 export class Model {
 	constructor() {
 		this.visitDateValidator = new VisitDateValidator();
 		this.menuOrderValidator = new MenuOrderValidator();
 		this.discountCalculator = new DiscountCalculator();
+		this.orderedMenuArray = [];
+	}
+
+	setOrderedMenuArray(orderedMenuArray) {
+		this.orderedMenuArray = orderedMenuArray;
 	}
 
 	validateDateOfVisit(dateOfVisit) {
@@ -27,9 +32,9 @@ export class Model {
 		this.menuOrderValidator.validateMenuOrder(orderMenu);
 	}
 
-	calculateTotalAmount(orderedMenuArray) {
+	calculateTotalAmount() {
 		let totalAmount = INITIAL_VALUE_ZERO;
-		orderedMenuArray.forEach(([item, quantity]) => {
+		this.orderedMenuArray.forEach(([item, quantity]) => {
 			for (let category in MENU) {
 				if (MENU[category].ITEMS.includes(item)) {
 					totalAmount +=
@@ -40,8 +45,10 @@ export class Model {
 		return totalAmount;
 	}
 
-	createOrderedMenuMessage(orderedMenuArray) {
-		return orderedMenuArray.map((menu) => menu.join(SEPARATOR.SPACE_STRING));
+	createOrderedMenuMessage() {
+		return this.orderedMenuArray.map((menu) =>
+			menu.join(SEPARATOR.SPACE_STRING)
+		);
 	}
 
 	noDiscountOrderResult(totalAmount) {
