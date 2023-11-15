@@ -29,11 +29,7 @@ class App {
 		OutputView.printOrderedMenu(orderedMenuMessageArray);
 		OutputView.printTotalAmountNoDiscount(totalAmount);
 
-		const orderResult = this.createOrderResult(
-			totalAmount,
-			dateOfVisit,
-			orderedMenuArray
-		);
+		const orderResult = this.createOrderResult(totalAmount, dateOfVisit);
 
 		OutputView.printOrderResult(...orderResult);
 	}
@@ -74,15 +70,11 @@ class App {
 		return this.model.createOrderedMenuMessage();
 	}
 
-	createOrderResult(totalAmount, dateOfVisit, orderedMenuArray) {
+	createOrderResult(totalAmount, dateOfVisit) {
 		if (totalAmount < MINIMUM_DISCOUNT_AMOUNT) {
 			return this.model.noDiscountOrderResult(totalAmount);
 		} else {
-			return this.model.discountOrderResult(
-				totalAmount,
-				dateOfVisit,
-				orderedMenuArray
-			);
+			return this.model.discountOrderResult(totalAmount, dateOfVisit);
 		}
 	}
 }

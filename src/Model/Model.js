@@ -96,12 +96,12 @@ export class Model {
 		});
 	}
 
-	discountOrderResult(totalAmount, dateOfVisit, orderedMenuArray) {
+	discountOrderResult(totalAmount, dateOfVisit) {
 		const giftMenu = this.#determineGiftMenu(totalAmount);
 		const benefitDetail = this.discountCalculator.computeBenefitDetails(
 			totalAmount,
 			dateOfVisit,
-			orderedMenuArray
+			this.orderedMenuArray
 		);
 		const totalBenefitAmount = benefitDetail.reduce((acc, cur) => acc + cur, 0);
 		const expectedPayment =
